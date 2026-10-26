@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Ejercicio Formularios y var_dump</title>
+
+    <style>
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
+    </style>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+
+
+
+    <h2>Formulario de Práctica en PHP</h2>
+
+
+
+    <!-- El formulario se apunta a sí mismo con action="" y método POST -->
+
+    <form action="ut02p03.php" method="POST">
+
+        <label for="nombre">Nombre:</label><br>
+
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="correo">Correo electrónico:</label><br>
+
+        <input type="text" id="correo" name="correo" required><br><br>
+
+        <label for="edad">Edad:</label><br>
+
+        <input type="number" id="edad" name="edad" required><br><br>
+
+        <label>Lenguajes que conoces:</label><br>
+
+        <input type="checkbox" id="php" name="lenguajes[]" value="PHP">
+
+        <label for="php">PHP</label><br>
+
+        <input type="checkbox" id="js" name="lenguajes[]" value="JavaScript">
+
+        <label for="js">JavaScript</label><br>
+
+        <input type="checkbox" id="python" name="lenguajes[]" value="Python">
+
+        <label for="python">Python</label><br><br>
+
+        <input type="submit" value="Enviar Datos">
+
+    </form>
+
+</body>
+
+</html>

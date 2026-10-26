@@ -1,30 +1,49 @@
-<?php
-
-$action = $_GET['action'] ?? 'home';
-
-switch ($action) {
-	case 'about':
-		$message = 'About page';
-		break;
-	case 'home':
-		$message = 'Welcome to my site';
-		break;
-	default:
-		http_response_code(404);
-		$message = 'Page not found';
-}
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></title>
+    <title>Ejemplo Servidor</title>
+    <style>
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
+    </style>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-	<h1><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></h1>
+    <!-- Bloque o sentencia de guión embebido en PHP -->
+    <?php
+    $color = $_GET["color"] ?? 'red'; // En la URL se define el valor de la variable. Ej.: https://misitio.test/index.php?color=cornflowerblue
+    $nombre = $_POST["nombre"] ?? 'invitado';
+    ?>
+    <h1 style="color: <?php echo $color; ?>;">
+        <?php
+
+        echo "Bienvenido a la web, " . $nombre; // Para 2 variables, se usa el operador AND (&&). Ej.: https://misitio.test/index.php?color=cornflowerblue&&nombre=Marco
+        ?>
+    </h1>
+
+    <div x-data="{ open: false }">
+        <button class="button is-warning" @click="open = true">Expand</button>
+
+        <span x-show="open">
+            Content...
+        </span>
+    </div>
+
+    <div class="buttons">
+        <a href="index.php?color=blue" class="button is-info">Azul</a>
+        <a href="index.php?color=green" class="button is-success">Verde</a>
+        <a href="index.php?color=yellow" class="button is-warning">Amarillo</a>
+        <a href="index.php?color=red" class="button is-danger">Rojo</a>
+    </div>
+
+    <form name="myform" method="post" action="index.php">
+        <input name="nombre" class="input is-link" type="text" placeholder="Introduce tu nombre...">
+        <input class="button is-link" type="submit" value="Enviar">
+    </form>
 </body>
 
 </html>

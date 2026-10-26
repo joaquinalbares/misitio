@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UT02 - P02</title>
+    <style>
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
+    </style>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <form name="myform" method="post" action="ut02p02.php">
+        <label for="sueldo">Sueldo:</label>
+        <input name="sueldo" class="input is-link" type="number" min="1000" placeholder="Introduce tu sueldo (mínimo 1000)" required>
+        <label for="puesto">Puesto:</label>
+        <select name="puesto" class="input is-link" required>
+            <option value="base">Base</option>
+            <option value="directivo">Directivo</option>
+            <option value="alto-cargo">Alto cargo</option>
+        </select>
+        <input class="button is-link" type="submit" value="Enviar">
+    </form>
+</body>
+</html>

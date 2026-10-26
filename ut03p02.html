@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de longevidad</title>
+    <style>
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
+    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<main class="container is-max-desktop section">
+    <header class="block mb-6">
+    <span class="tag is-primary is-light is-uppercase has-text-weight-semibold mb-2">
+      <i class="fa fa-info-circle mr-1"></i>Estimación orientativa
+    </span>
+        <h1 class="title is-2">¿Cuántos años voy a vivir?</h1>
+        <p class="subtitle is-6 has-text-grey mt-2">
+            Cinco preguntas sobre hábitos con efecto medido en estudios de gran tamaño. El resultado es una media para personas con tu perfil, no un pronóstico individual. Cada ajuste se justifica más abajo con su fuente.
+        </p>
+    </header>
+
+
+    <form method="post" action="ut03p02.php">
+        <fieldset class="box mb-5">
+            <legend class="label is-medium mb-2">
+                <span class="tag is-info is-light mr-2">Punto de partida</span>¿Cuál es tu sexo?
+            </legend>
+            <p class="help mb-3">Se usa solo para asignar tu punto de partida: la esperanza de vida al nacer en España según el INE (datos de 2024).</p>
+            <div class="columns is-multiline">
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="sexo-hombre">
+                        <input type="radio" id="sexo-hombre" name="sexo" value="hombre" checked class="mr-2">
+                        <span><strong>Hombre</strong> <span class="has-text-grey">(81,4 años)</span></span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="sexo-mujer">
+                        <input type="radio" id="sexo-mujer" name="sexo" value="mujer" class="mr-2">
+                        <span><strong>Mujer</strong> <span class="has-text-grey">(86,5 años)</span></span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="box mb-5">
+            <legend class="label is-medium mb-2">
+                <span class="tag is-info is-light mr-2">Pregunta 1 de 5</span>¿Fumas o has fumado?                </legend>
+            <p class="help mb-3">Cuenta cigarrillos, puros y pipa.</p>
+            <div class="columns is-multiline">
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="tabaco-nunca">
+                        <input type="radio" id="tabaco-nunca" name="tabaco" value="nunca" checked class="mr-2">
+                        <span>Nunca he fumado</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="tabaco-ex_antes">
+                        <input type="radio" id="tabaco-ex_antes" name="tabaco" value="ex_antes" class="mr-2">
+                        <span>Lo dejé antes de los 40</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="tabaco-ex_despues">
+                        <input type="radio" id="tabaco-ex_despues" name="tabaco" value="ex_despues" class="mr-2">
+                        <span>Lo dejé a los 40 o después</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="tabaco-actual">
+                        <input type="radio" id="tabaco-actual" name="tabaco" value="actual" class="mr-2">
+                        <span>Fumo actualmente</span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="box mb-5">
+            <legend class="label is-medium mb-2">
+                <span class="tag is-info is-light mr-2">Pregunta 2 de 5</span>¿Cuánta actividad física haces a la semana?                </legend>
+            <p class="help mb-3">Suma caminar a paso ligero, bici, deporte o trabajo físico. 150 minutos semanales es la recomendación de la OMS.</p>
+            <div class="columns is-multiline">
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="actividad-nada">
+                        <input type="radio" id="actividad-nada" name="actividad" value="nada" class="mr-2">
+                        <span>Casi nada (menos de 15 minutos)</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="actividad-poco">
+                        <input type="radio" id="actividad-poco" name="actividad" value="poco" checked class="mr-2">
+                        <span>Algo (de 15 a 149 minutos)</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="actividad-oms">
+                        <input type="radio" id="actividad-oms" name="actividad" value="oms" class="mr-2">
+                        <span>Entre 150 y 449 minutos</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="actividad-mucho">
+                        <input type="radio" id="actividad-mucho" name="actividad" value="mucho" class="mr-2">
+                        <span>450 minutos o más</span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="box mb-5">
+            <legend class="label is-medium mb-2">
+                <span class="tag is-info is-light mr-2">Pregunta 3 de 5</span>¿Cuántas bebidas alcohólicas tomas a la semana?                </legend>
+            <p class="help mb-3">Una bebida estándar equivale a unos 10 g de alcohol: una caña, una copa de vino o un vermut pequeño.</p>
+            <div class="columns is-multiline">
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="alcohol-b1">
+                        <input type="radio" id="alcohol-b1" name="alcohol" value="b1" checked class="mr-2">
+                        <span>Ninguna o hasta 10</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="alcohol-b2">
+                        <input type="radio" id="alcohol-b2" name="alcohol" value="b2" class="mr-2">
+                        <span>De 11 a 20</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="alcohol-b3">
+                        <input type="radio" id="alcohol-b3" name="alcohol" value="b3" class="mr-2">
+                        <span>De 21 a 35</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="alcohol-b4">
+                        <input type="radio" id="alcohol-b4" name="alcohol" value="b4" class="mr-2">
+                        <span>Más de 35</span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="box mb-5">
+            <legend class="label is-medium mb-2">
+                <span class="tag is-info is-light mr-2">Pregunta 4 de 5</span>¿Cuánto mides y cuánto pesas?
+            </legend>
+            <p class="help mb-3">Se calcula el índice de masa corporal (IMC): el peso en kilos dividido por la altura en metros al cuadrado.</p>
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label class="label" for="altura">Altura (cm)</label>
+                        <div class="control has-icons-left">
+                            <input class="input" id="altura" name="altura" type="text" inputmode="numeric" value="165">
+                            <span class="icon is-small is-left"><i class="fa fa-arrows-v"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <label class="label" for="peso">Peso (kg)</label>
+                        <div class="control has-icons-left">
+                            <input class="input" id="peso" name="peso" type="text" inputmode="decimal" value="65">
+                            <span class="icon is-small is-left"><i class="fa fa-balance-scale"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="box mb-5">
+            <legend class="label is-medium mb-2">
+                <span class="tag is-info is-light mr-2">Pregunta 5 de 5</span>¿Cómo describirías tu alimentación habitual?                </legend>
+            <p class="help mb-3">Piensa en lo que comes la mayoría de los días, no en las comidas especiales.</p>
+            <div class="columns is-multiline">
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="dieta-mala">
+                        <input type="radio" id="dieta-mala" name="dieta" value="mala" checked class="mr-2">
+                        <span>Mucha carne roja o procesada, bollería, refrescos y comida precocinada</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="dieta-mixta">
+                        <input type="radio" id="dieta-mixta" name="dieta" value="mixta" class="mr-2">
+                        <span>Mezclada: algo de verdura y fruta, algo de procesados</span>
+                    </label>
+                </div>
+                <div class="column is-6">
+                    <label class="radio box p-3 is-flex is-align-items-center mb-0" for="dieta-med">
+                        <input type="radio" id="dieta-med" name="dieta" value="med" class="mr-2">
+                        <span>Mediterránea: legumbres, verdura, fruta, pescado, aceite de oliva y frutos secos</span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+
+
+
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-primary is-medium">
+                    <i class="fa fa-calculator mr-2"></i>Ver mi resultado
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+</main>
+</body>
+</html>
