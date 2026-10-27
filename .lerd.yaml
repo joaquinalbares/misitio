@@ -1,0 +1,5 @@
+domains:
+  - misitio
+secured: true
+proxy:
+  port: 3000
