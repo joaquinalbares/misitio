@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de Ejemplo - Elementos de Entrada</title>
+    <style>
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="max-width: 700px;">
+            <div class="card">
+                <header class="card-header has-background-info">
+                    <p class="card-header-title has-text-white">
+                        <i class="fa fa-list-alt mr-2"></i> Elementos de Entrada
+                    </p>
+                </header>
+                <div class="card-content">
+
+                    <!-- ATENCIÓN ALUMNO: enctype es obligatorio cuando enviamos archivos con $_FILES -->
+                    <form action="ejemplo-res.php" method="POST" enctype="multipart/form-data">
+
+                        <!-- Campo oculto (HIDDEN) -->
+                        <input type="hidden" name="token_sesion" value="XYZ987654321">
+
+                        <h2 class="title is-5 has-text-info">Elementos de tipo INPUT</h2>
+
+                        <!-- INPUT TEXT -->
+                        <div class="field">
+                            <label class="label">TEXT</label>
+                            <label class="subtitle is-6" for="cadena">Introduzca la cadena a buscar:</label>
+                            <div class="control has-icons-left">
+                                <input class="input" type="text" id="cadena" name="cadena" value="valor por defecto">
+                                <span class="icon is-small is-left"><i class="fa fa-font"></i></span>
+                            </div>
+                        </div>
+
+                        <!-- INPUT RADIO -->
+                        <div class="field">
+                            <label class="label">RADIO</label>
+                            <div class="control">
+                                <span class="mr-3">Sexo:</span>
+                                <label class="radio">
+                                    <input type="radio" name="sexo" value="Mujer" checked> Mujer
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="sexo" value="Hombre"> Hombre
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- INPUT CHECKBOX (Array extras[]) -->
+                        <div class="field">
+                            <label class="label">CHECKBOX</label>
+                            <div class="control">
+                                <span class="mr-3">Extras:</span>
+                                <label class="checkbox mr-2">
+                                    <input type="checkbox" name="extras[]" value="Garaje"> Garaje
+                                </label>
+                                <label class="checkbox mr-2">
+                                    <input type="checkbox" name="extras[]" value="Piscina"> Piscina
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="extras[]" value="Jardín"> Jardín
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- INPUT FILE -->
+                        <div class="field">
+                            <label class="label">FILE</label>
+                            <div class="file has-name is-fullwidth">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="fichero">
+                                    <span class="file-cta">
+                                        <span class="file-icon"><i class="fa fa-upload"></i></span>
+                                        <span class="file-label">Examinar…</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- INPUT PASSWORD -->
+                        <div class="field">
+                            <label class="label">PASSWORD</label>
+                            <label class="subtitle is-6" for="password">Contraseña:</label>
+                            <div class="control has-icons-left">
+                                <input class="input" type="password" id="password" name="password" placeholder="••••••••">
+                                <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h2 class="title is-5 has-text-info">Elemento SELECT</h2>
+
+                        <!-- SELECT SIMPLE -->
+                        <div class="field">
+                            <label class="label">SELECT SIMPLE</label>
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                    <label class="label" for="color">Color:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="color" id="color">
+                                                    <option value="Rojo" selected>Rojo</option>
+                                                    <option value="Verde">Verde</option>
+                                                    <option value="Azul">Azul</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SELECT MÚLTIPLE (Array idiomas[]) -->
+                        <div class="field">
+                            <label class="label">SELECT MÚLTIPLE</label>
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                    <label class="label" for="idiomas">Idiomas:</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <div class="select is-multiple">
+                                                <select name="idiomas[]" id="idiomas" multiple size="3">
+                                                    <option value="Inglés" selected>Inglés</option>
+                                                    <option value="Francés">Francés</option>
+                                                    <option value="Alemán">Alemán</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h2 class="title is-5 has-text-info">Elemento TEXTAREA</h2>
+
+                        <!-- TEXTAREA -->
+                        <div class="field">
+                            <label class="label" for="comentario">Comentario:</label>
+                            <div class="control">
+                                <textarea class="textarea" id="comentario" name="comentario" rows="3">Este libro me parece ...</textarea>
+                            </div>
+                        </div>
+
+                        <!-- BOTONES DE ENVÍO Y BORRADO -->
+                        <div class="field is-grouped mt-5">
+                            <div class="control">
+                                <button type="submit" class="button is-link">
+                                    <i class="fa fa-paper-plane mr-2"></i> Enviar datos
+                                </button>
+                            </div>
+                            <div class="control">
+                                <button type="reset" class="button is-light">
+                                    <i class="fa fa-eraser mr-2"></i> Borrar datos
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

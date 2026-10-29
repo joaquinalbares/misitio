@@ -1,5 +1,7 @@
 domains:
   - misitio
+php_version: "8.4"
+public_dir: .
 secured: true
-proxy:
-  port: 3000
+services:
+  - mysql
