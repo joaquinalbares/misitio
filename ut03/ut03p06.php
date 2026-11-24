@@ -1,3 +1,33 @@
+<?php
+/* GUIA DE RESOLUCION
+OK - Saber si el formulario se ha enviado.
+OK - Recoger los datos.
+Validarlos y apuntar los errores.
+OK - Si no hay errores, calcular el resultado.
+OK - Mostrar el formulario (con lo que escribió el usuario), los errores y el resultado.
+*/
+$hayFilasExtra = false;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $num_casillas = $_POST['num_casillas'];
+    $casillas_por_fila = $_POST['casillas_por_fila'];
+    $num_casillas = filter_var($num_casillas, FILTER_VALIDATE_INT);
+    $casillas_por_fila = filter_var($casillas_por_fila, FILTER_VALIDATE_INT);
+    if ($casillas_por_fila === false || $num_casillas === false) {
+        $error = "Solo se pueden escribir numeros";
+    }
+    elseif ($num_casillas <=0 || $casillas_por_fila <=0) {
+        $error = 'numero de casillas o casillas por fila no valida';
+    }
+    if ($num_casillas % $casillas_por_fila != 0) {
+        $hayFilasExtra = true;
+    }
+
+}
+else {
+    $num_casillas = "";
+    $casillas_por_fila = "";
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,17 +54,17 @@
                 <i class="fa fa-table"></i> Tabla numerada dinámica
             </h1>
 
-            <!-- TODO: muestra este aviso SOLO si hay un error -->
-            <div class="notification is-danger">Mensaje de error de ejemplo.</div>
-
+            <?php if (isset($error)) : ?>
+            <div class="notification is-danger"><?= $error ?></div>
+            <?php endif; ?>
             <form action="" method="POST">
-                <!-- TODO: formulario persistente, el value debe mostrar lo que envió el usuario (escapado) -->
+                <!-- TODO: formulario persistente, el value 23 mostrar lo que envió el usuario (escapado) -->
                 <div class="columns">
                     <div class="column">
                 <div class="field">
                     <label class="label" for="num_casillas">Número de casillas:</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="number" id="num_casillas" name="num_casillas" value="12" min="1" required>
+                        <input class="input" type="number" id="num_casillas" name="num_casillas" value="<?= $num_casillas ?>" required>
                         <span class="icon is-small is-left"><i class="fa fa-th"></i></span>
                     </div>
                 </div>
@@ -43,7 +73,7 @@
                 <div class="field">
                     <label class="label" for="casillas_por_fila">Casillas por fila:</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="number" id="casillas_por_fila" name="casillas_por_fila" value="5" min="1" required>
+                        <input class="input" type="number" id="casillas_por_fila" name="casillas_por_fila" value="<?= $casillas_por_fila ?>" required>
                         <span class="icon is-small is-left"><i class="fa fa-arrows-h"></i></span>
                     </div>
                 </div>
@@ -62,9 +92,17 @@
             <div class="table-container">
                 <table class="table is-bordered is-striped is-fullwidth has-text-centered">
                     <tbody>
-                        <tr><td><strong>1</strong></td><td><strong>2</strong></td><td><strong>3</strong></td><td><strong>4</strong></td><td><strong>5</strong></td></tr>
-                        <tr><td><strong>6</strong></td><td><strong>7</strong></td><td><strong>8</strong></td><td><strong>9</strong></td><td><strong>10</strong></td></tr>
-                        <tr><td><strong>11</strong></td><td><strong>12</strong></td><td class="has-background-light"></td><td class="has-background-light"></td><td class="has-background-light"></td></tr>
+                        <tr>
+                        <?php for ($i=1; $i<=$num_casillas; $i++) : ?>
+                                <td><?= $i ?></td>
+                            <?php if ($i%$casillas_por_fila === 0) : ?>
+                                </tr><tr>
+                            <?php endif; ?> 
+                        <?php endfor; ?>
+                        <?php if ($hayFilasExtra) for ($j=($num_casillas%$casillas_por_fila); $j<$casillas_por_fila; $j++) : ?>
+                            <td>&nbsp;</td>
+                        <?php endfor; ?>                    
+                        </tr>
                     </tbody>
                 </table>
             </div>
