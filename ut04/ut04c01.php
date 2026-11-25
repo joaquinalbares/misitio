@@ -28,8 +28,8 @@ if (!empty($reiniciar)) {
         ]);
         unset($_COOKIE[$laVar]);
     }
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit(); 
+    header("Location: " . basename(__FILE__));
+    exit();   
 }
 
 if (!empty($mayor)) {
@@ -40,6 +40,8 @@ if (!empty($mayor)) {
         'httponly' => true,                         // JavaScript no puede leerla
         'samesite' => 'Lax',                        // protege frente a CSRF (apartado 7)
     ]);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 if (!empty($carnet)) {
     $contador=2;
@@ -59,7 +61,7 @@ if (!empty($titulo)) {
         'httponly' => true,                         // JavaScript no puede leerla
         'samesite' => 'Lax',                        // protege frente a CSRF (apartado 7)
     ]);
-    header("Location: " . $_SERVER['PHP_SELF']);
+    header("Location: " . basename(__FILE__));
     exit();   
 }
 
